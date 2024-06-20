@@ -18,5 +18,6 @@ jour de travail(lundi à vendredi)=>employee normale
                 (lundi à dimanche)=>gardien
 jour feriés(17juin,25juin,26juin)
 
-
-
+specifiena ilay calendrier
+jour nuit
+raisonnement anah salaire par semaine

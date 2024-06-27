@@ -77,8 +77,31 @@ public class PointageTest {
         publicHolidays.add(LocalDate.of(2024, Month.JUNE, 26));
         Calendar calendar1=new Calendar(publicHolidays,LocalDate.of(2024, 5, 26),LocalDate.of(2024, 7, 6));
         Pointage pointage=new Pointage(calendar1,rabe);
-        double expectedSalary = 807855.2142857143;
+        double expectedSalary = 796712.6142857143;
         double actualSalary = amountSalary(pointage);
+        double delta = 0.0001;
+        assertEquals(expectedSalary, actualSalary, delta);
+    }
+    @Test
+    public void heureDeTravailRakotoTotalAPayer(){
+        List<LocalDate> publicHolidays=new ArrayList<>();
+        publicHolidays.add(LocalDate.of(2024, Month.JUNE, 26));
+        Calendar calendar1=new Calendar(publicHolidays,LocalDate.of(2024, 5, 26),LocalDate.of(2024, 7, 6));
+        Pointage pointage=new Pointage(calendar1,rakoto);
+        double expectedSalary =  604285.7142857143;
+        double actualSalary = amountSalary(pointage);
+        double delta = 0.0001;
+        assertEquals(expectedSalary, actualSalary, delta);
+    }
+    @Test
+    public void heureDeTravailRabeTotalAPayer(){
+        List<LocalDate> publicHolidays=new ArrayList<>();
+        publicHolidays.add(LocalDate.of(2024, Month.JUNE, 26));
+        Calendar calendar1=new Calendar(publicHolidays,LocalDate.of(2024, 5, 26),LocalDate.of(2024, 7, 6));
+        Pointage pointage=new Pointage(calendar1,rabe);
+        double expectedSalary =  785570.8714285716;
+        double actualSalary = amountSalary(pointage);
+        System.out.println();
         double delta = 0.0001;
         assertEquals(expectedSalary, actualSalary, delta);
     }

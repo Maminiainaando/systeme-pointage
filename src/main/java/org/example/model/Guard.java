@@ -23,7 +23,6 @@ public final class Guard extends Employee{
         this.nameCategorie = nameCategorie;
         this.jourOuNuit=jourOuNuit;
     }
-
     @Override
     public double calculerSalaireTotal(int heuresNormales,int heuresSupplementaires,int heuresMajorees) {
         double result=0;
@@ -36,8 +35,7 @@ public final class Guard extends Employee{
         return result;
 
     }
-
-    public double calculerSalaireTotalEnUtilisantHeure(int heuresNormales,int heuresSupplementaires,int heuresMajoreNuit,int heuresMajoreDimanche,int heuresMajoreFerie) {
+    public double calculerSalaireTotalEnUtilisantHeure(int heuresNormales,int heuresSupplementaires,int heuresMajoreNuit,int heuresMajoreDimanche,int heuresMajoreFerie){
         double result=0;
         double salaireDeUneHeure=salaireNormalParDesHeureNormalParSemaine()/nombreHeureNormalDeTravailParSemaine();
         double salaireUnJour=salaireNormalParDesHeureNormalParSemaine()/7;
@@ -51,13 +49,14 @@ public final class Guard extends Employee{
         }else if(heuresMajoreFerie>0 && heuresMajoreNuit>0){
             System.out.println(salaireUneNuit);
             result = salaireNormal * HEUREMAJORE_HM30;
-            result +=heuresMajoreFerie*salaireUneNuit*HEUREMAJORE_HM50;
+            result +=heuresMajoreFerie*salaireUneNuit*HEUREMAJORE_HM30;
         }else {
             result=salaireNormal;
         }
         System.out.println("Salaire de une heure : "+salaireDeUneHeure);
         System.out.println("Salaire de une nuit : "+salaireUneNuit);
         System.out.println("Salaire normal : "+salaireNormal);
+        System.out.println("Salaire net : "+result*0.80);
         return result;
     }
     @Override
@@ -67,17 +66,5 @@ public final class Guard extends Employee{
 
     public Double salaireNormalParDesHeureNormalParSemaine() {
         return 100000d;
-    }
-    public Double calculSalaireHeureMajoreNuit(){
-        return salaireNormalParDesHeureNormalParSemaine()*HEUREMAJORE_HM30;
-    }
-    public Double calculSalaireHeureMajoreDimanche(){
-        return salaireNormalParDesHeureNormalParSemaine()*HEUREMAJORE_HM40;
-    }
-    public Double calculSalaireHeureMajoreFerie(){
-        return salaireNormalParDesHeureNormalParSemaine()*HEUREMAJORE_HM50;
-    }
-    public Double montantIndemnitéProportionnelleAuSalaire() {
-        return null;
     }
 }

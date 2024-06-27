@@ -1,27 +1,47 @@
 package org.example.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.util.Date;
+@Getter
+@Setter
+@ToString
+public final class NormalEmployes extends Employee{
+    private final String nameCategorie;
+    private static final double TAUX_HS30 = (100/130);
+    private static final double TAUX_HS50 = (100/150);
 
-final class NormalEmployes extends Employee{
-    private static final double TAUX_HS30 = 1.3;
-    private static final double TAUX_HS50 = 1.5;
-
-    public NormalEmployes(String nom, String prenom, int numeroMatricule, Date dateDeNaissance, Date dateDEmbauche, Date dateFinContrat, Double salaireBrute, String categorie) {
-        super(nom, prenom, numeroMatricule, dateDeNaissance, dateDEmbauche, dateFinContrat, salaireBrute, categorie);
+    public NormalEmployes(String nom, String prenom, int numeroMatricule, Date dateDeNaissance, Date dateDEmbauche, Date dateFinContrat, double salaireBrute, String nameCategorie) {
+        super(nom, prenom, numeroMatricule, dateDeNaissance, dateDEmbauche, dateFinContrat, salaireBrute);
+        this.nameCategorie = nameCategorie;
     }
+
 
     @Override
     public double calculerSalaireTotal(int heuresNormales, int heuresSupplementaires, int heuresMajorees) {
         double salaireNormal = this.getSalaireBrute();
-        double salaireSupplementaire = 0.0;
-
+        int salaireSupplementaire = 0;
         if (heuresSupplementaires > 8) {
             salaireSupplementaire += 8 * (salaireNormal / heuresNormales) * TAUX_HS30;
             salaireSupplementaire += (heuresSupplementaires - 8) * (salaireNormal / heuresNormales) * TAUX_HS50;
         } else {
             salaireSupplementaire += heuresSupplementaires * (salaireNormal / heuresNormales) * TAUX_HS30;
         }
-
         return salaireNormal + salaireSupplementaire;
+    }
+
+    @Override
+    public int nombreHeureNormalDeTravailParSemaine() {
+        return 40;
+    }
+
+    public Double salaireNormalParDesHeureNormalParSemaine() {
+        return 100_000d;
+    }
+
+    public Double montantIndemnitéProportionnelleAuSalaire() {
+        return null;
     }
 }

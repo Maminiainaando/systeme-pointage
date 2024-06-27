@@ -91,12 +91,8 @@ public class Pointage {
     public static double amountSalary(Pointage pointage){
         List<LocalDate> workingHard=new ArrayList<>();
         Map<LocalDate,String> calendaResult=getCalendareeee(pointage.getCalendar().getStart(),pointage.getCalendar().getEnd(), pointage.getCalendar().getPublicHoliday(), pointage.getEmployee(),workingHard);
-        List<LocalDate> publicHoliday=new ArrayList<>();
-        publicHoliday.add(LocalDate.of(2024, Month.JUNE, 17));
-        publicHoliday.add(LocalDate.of(2024, Month.JUNE, 25));
-        publicHoliday.add(LocalDate.of(2024, Month.JUNE, 26));
         int heureSup=0;
-        int heureEffectue=heureDeTravailEffectue(pointage);
+        int heureEffectue=heureDeTravail(pointage);
         int nombreDeJour=calendaResult.size();
         int nombreDeSemaine=nombreDeJour/7;
         int heureNormal=nombreDepointage(pointage)*10;
@@ -104,6 +100,7 @@ public class Pointage {
         int heuresMajoreDimanche=0;
         int heuresMajoreFerie=0;
         int heureMaj=0;
+        List<LocalDate> localDateList=new ArrayList<>();
         for (Map.Entry<LocalDate, String> entry : calendaResult.entrySet()) {
             LocalDate date = entry.getKey();
             String value = entry.getValue();
@@ -116,6 +113,7 @@ public class Pointage {
                 heuresMajoreNuit+=4;
             }
         }
+        heureSup=heureEffectue-heureNormal-heureMaj;
         System.out.println("Le nombre de jour : "+nombreDeJour);
         System.out.println("Le nombre de semaine : "+nombreDeSemaine);
         System.out.println("Le nombre de heureSup : "+heureSup);
@@ -133,20 +131,22 @@ public class Pointage {
     public static void main(String[] args) {
         List<DayOfWeek> workingDays = new ArrayList<>();
         List<LocalDate> publicHolidays = new ArrayList<>();
+        publicHolidays.add(LocalDate.of(2024,6,26));
         Employee normalEmployee = new NormalEmployes("Nom", "Prenom", 123, new Date(), new Date(), new Date(), 100000, "Categorie1");
         Employee guard = new Guard("Nom", "Prenom", 456, new Date(), new Date(), new Date(), 100000, "Categorie2","nuit");
         Guard guarde = new Guard("Nom", "Prenom", 456, new Date(), new Date(), new Date(), 100000, "Categorie2","jour");
-        Calendar calendar1=new Calendar(publicHolidays,LocalDate.of(2024, 5, 26),LocalDate.of(2024, 6, 1));
+        Calendar calendar1=new Calendar(publicHolidays,LocalDate.of(2024, 5, 26),LocalDate.of(2024, 7, 6));
         List<LocalDate> workingHard=new ArrayList<>();
         Pointage pointage=new Pointage(calendar1,guarde);
         //System.out.println(nombreDepointage(pointage));
         //System.out.println(heureDeTravailEffectue(pointage));
         //System.out.println();
-      System.out.println(amountSalary(pointage));
+       System.out.println(amountSalary(pointage));
         //System.out.println((getCalendareeee(calendar1.getStart(),calendar1.getEnd(),publicHolidays,guard,workingHard)));
         /*System.out.println("calendrier :"+getCalendare(pointage.getCalendar().getStart(),
                 pointage.getCalendar().getEnd(), pointage.getCalendar().getPublicHoliday(),
                 pointage.getEmployee()
                 ));*/
+       // System.out.println(heureDeTravail(pointage));
     }
 }

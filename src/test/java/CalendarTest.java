@@ -1,2 +1,4 @@
-package PACKAGE_NAME;public class CalendarTest {
+import static org.junit.Assert.assertEquals;
+public class CalendarTest {
+
 }
